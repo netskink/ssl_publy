@@ -182,4 +182,14 @@ Note gcp mentioned ES256_x509 which is the x509 wrapper around the ES256 key.
 At least I think its X509,, lol.
 
 
+10. The Server Hello frame
+
+Frame 335 is the Server Hello frame.  Notice the server only has one cipher suite:
+`TLS_RSA_WITH_AES_128_GCM_SHA256`.  Hmm, that is the first listed client supported
+algorithm.
+
+![img](imgs/ss16.png)
+
+
+
 
