@@ -195,6 +195,7 @@ algorithm.
 
 So after the Server gives its supported algorithm, the arduino starts sending old data out?  The next frames are highlighted in red and decoded as duplicates.  Is the stack messed up?  Wireshark says its a duplicate ACK to frame 332.
 
+![img](imgs/ss17.png)
 What now big boy?
 
 
