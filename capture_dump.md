@@ -77,5 +77,20 @@ panel.  Its how ping knows where to send the packet.
 
 ![img](imgs/ss1.png)
 
+6. web fetch google.com
+
+Frame 250
+
+Frame 240 is the dns request.
+
+![img](imgs/ss6.png)
+
+```
+$ nslookup 64.233.177.105
+105.177.233.64.in-addr.arpa	name = yx-in-f105.1e100.net.
+```
+
+![img](imgs/ss7.png)
+
 
 
