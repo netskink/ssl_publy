@@ -80,6 +80,7 @@ panel.  Its how ping knows where to send the packet.
 6. web fetch google.com
 
 Frame 250
+![img](imgs/ss8.png)
 
 Frame 240 is the dns request.
 
@@ -93,4 +94,4 @@ $ nslookup 64.233.177.105
 ![img](imgs/ss7.png)
 
 
-
+7. 
