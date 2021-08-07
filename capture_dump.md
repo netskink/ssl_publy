@@ -94,4 +94,43 @@ $ nslookup 64.233.177.105
 ![img](imgs/ss7.png)
 
 
-7. 
+7. Start of the mqtt/ssl connection to GCP iot core.
+
+Frame 328 DNS Query of mqtt.googleapis.com the "MQTT broker"
+
+
+![img](imgs/ss9.png)
+
+Frame 329 DNS Response of mqtt.googleapis.com 74.125.202.206
+
+```
+$ nslookup 74.125.202.206
+206.202.125.74.in-addr.arpa	name = io-in-f206.1e100.net.
+
+Notice this?
+
+$ nslookup mqtt.googleapis.com
+Server:		192.168.86.1
+Address:	192.168.86.1#53
+
+Non-authoritative answer:
+Name:	mqtt.googleapis.com
+Address: 74.125.69.206
+Name:	mqtt.googleapis.com
+Address: 74.125.69.206
+Name:	mqtt.googleapis.com
+Address: 74.125.69.206
+... stuff truncated
+
+```
+
+![img](imgs/ss10.png)
+
+
+8.  The start of the MQTT conversation
+
+Frame 330 Shows a new filter.  Its just the traffic regarding the
+mqtt host.
+
+
+![img](imgs/ss12.png)
