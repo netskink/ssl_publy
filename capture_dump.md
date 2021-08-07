@@ -134,3 +134,26 @@ mqtt host.
 
 
 ![img](imgs/ss12.png)
+
+9. The Client Hello frame
+Keeping the illustrated SSL guide in mind, look at the Client 
+Hello frame.  I'll show multplie screenshots of this section 
+as I examine it.  
+
+Frame 333 the client hello with list of cipher 
+
+
+![img](imgs/ss13.png)
+
+The five cipher suites available by the arduino/client are:
+
+* RSA AES 128 GCM SHA256
+* RSA AES 256 CBC SHA256
+* RSA AES 128 CBC SHA256
+* RSA AES 256 CBC SHA
+* RSA AES 128 GCM SHA
+
+![img](imgs/ss14.png)
+
+Let's take a moment to look at the crypto chip on the board.
+
