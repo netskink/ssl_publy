@@ -155,5 +155,31 @@ The five cipher suites available by the arduino/client are:
 
 ![img](imgs/ss14.png)
 
-Let's take a moment to look at the crypto chip on the board.
+Let's take a look at the header file for the crypto chip (ECCX08.h) on the arduino.
+Sadly it does not list algorithms.  The closest thing of interest is the
+sha256 routine.
+
+
+![img](imgs/ss15.png)
+
+Let's take a moment to look at the crypto chip on the board.  [Here](https://www.microchip.com/en-us/product/atecc508a)
+
+In feature description are some important excerpts, listed here:
+
+* Easy way to run ECDSA and ECDH Key Agreement
+* Performs High-Speed Public Key (PKI) Algorithms
+* NIST Standard P256 Elliptic Curve Support
+* SHA-256 Hash Algorithm with HMAC Option
+* Host and Client Operations
+* 256-bit Key Length
+* Storage for up to 16 Keys
+* ECC P256 (ECDH and ECDSA), SHA256
+
+I wonder about how here it says 256-bit but the software is returning algorithms
+with 128 and 256 bit.  The important thing though is ES256 which it explicitly 
+states in third  bullet.  That was the chosen algorithm in the GCP console.
+Note gcp mentioned ES256_x509 which is the x509 wrapper around the ES256 key.
+At least I think its X509,, lol.
+
+
 
