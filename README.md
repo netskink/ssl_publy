@@ -23,7 +23,7 @@ does away with the crypto code in the google sample.
 
 
 
-## HTTP/HTTPS on Arduino
+## ICMP and HTTP/HTTPS on Arduino
 20210811
 
 Since I had a hard time understanding SSL and MQTT and Crypto in the google sample, I decided
@@ -319,7 +319,19 @@ as 192.168.0.160.  The capture shows it as 192.168.1.128.
 
 ![img](imgs/ss21.png)
 
-So with that said, I am using a capture filter as opposed to a display filter in wireshark.  The capture file is in [captures](./capfiles/)
+So with that said, I am using a capture filter as opposed to a display filter in wireshark.  The capture file is in the [capfiles](./capfiles/) directory.
+
+So, now that we know how to configure wireshark, lets see what happens
+when we attempt to connect with HTTPs and no domain cert loaded
+in the firmware.
+
+The output and capture file
+
+
+![img](imgs/ss22.png)
+
+![img](imgs/ss23.png)
+
 
 
 
@@ -327,5 +339,8 @@ So with that said, I am using a capture filter as opposed to a display filter in
 This is a 202108 or 07 capture file.  After this one, I modifed the firmware and crypto.
 I also made other changes but I can't remember in detail what I did.  Consider it a wireshark 
 tutorial.
+
+Its worth looking at if you don't know wireshark.
+
 see [crash_dump.md](capture_dump.md)
 
