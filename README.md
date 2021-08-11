@@ -332,7 +332,18 @@ The output and capture file
 
 ![img](imgs/ss23.png)
 
+The capture file is named HTTPS-no-certs-loaded.pcapng
 
+Uploading a cert of google.com:443 with utility and trying again
+results in:
+
+That generates a lot of data in console since this sample prints the
+contents of a webpage.  It also generates a lot of traffic in wireshark.  These are the screenshots and the capture file is named HTTPS-goog-cert-loaded.pcapng
+
+
+![img](imgs/ss24.png)
+
+![img](imgs/ss25.png)
 
 
 ## Archive capture file
