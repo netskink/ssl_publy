@@ -308,6 +308,19 @@ setting in the utility.
 
 ![img](imgs/ss20.png)
 
+I can tell you already, it will fail.  It will fail because the stack
+does indeed use the domain.  However, lets capture the failure for
+later analysis.
+
+Before I do that though, here is an icmp test program.  I'm showing 
+this because it explains the ip address problem you will see.
+The arduino is on wifi, the console prints the arduino address
+as 192.168.0.160.  The capture shows it as 192.168.1.128.
+
+![img](imgs/ss21.png)
+
+So with that said, I am using a capture filter as opposed to a display filter in wireshark.  The capture file is in [captures](./capfiles/)
+
 
 
 ## Archive capture file
