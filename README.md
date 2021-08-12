@@ -319,7 +319,7 @@ as 192.168.0.160.  The capture shows it as 192.168.1.128.
 
 ![img](imgs/ss21.png)
 
-So with that said, I am using a capture filter as opposed to a display filter in wireshark.  The capture file is in the [capfiles](./capfiles/) directory.
+So with that said, I am using a capture filter `host 192.168.1.128` as opposed to a display filter in wireshark.  The capture file is in the [capfiles](./capfiles/) directory.
 
 So, now that we know how to configure wireshark, lets see what happens
 when we attempt to connect with HTTPs and no domain cert loaded
@@ -344,6 +344,145 @@ contents of a webpage.  It also generates a lot of traffic in wireshark.  These 
 ![img](imgs/ss24.png)
 
 ![img](imgs/ss25.png)
+
+##
+## MQTT to GCP on Arduino
+
+Running [this](https://github.com/arduino/ArduinoCloudProviderExamples/tree/master/examples/Google%20Cloud%20Platform%20IoT%20Core/GCP_IoT_Core_WiFi) code with one change.  Since I am using MKR1000 I switch the 
+header as wonderfully commented.
+
+Before I show the capture file and output, let me specify my 
+current "ssl" setup.
+
+I have the google.com:443 domain loaded.  I read something about
+where people said a fix was to include the cert used to sign 
+the other cert.  I'm still unclear on the terms or process.
+But, I'm thinking what they are intending is that the 
+crypto chip needs the firmware to have the correct cert
+loaded before it generates a key.  So with that said
+let me add the mqtt cert in case I need that.
+
+![img](imgs/ss30.png)
+
+```
+openssl s_client -connect  mqtt.googleapis.com:8883
+
+$ openssl s_client -connect  mqtt.googleapis.com:8883
+CONNECTED(00000003)
+depth=2 OU = GlobalSign Root CA - R2, O = GlobalSign, CN = GlobalSign
+verify return:1
+depth=1 C = US, O = Google Trust Services, CN = GTS CA 1O1
+verify return:1
+depth=0 C = US, ST = California, L = Mountain View, O = Google LLC, CN = mqtt.googleapis.com
+verify return:1
+
+JFD Just a comment, the lines above do not show up in a stdout capture
+with the exception of the CONNECTED line.  In that case its more 
+readable, but I want to show all the output.
+---
+Certificate chain
+ 0 s:C = US, ST = California, L = Mountain View, O = Google LLC, CN = mqtt.googleapis.com
+   i:C = US, O = Google Trust Services, CN = GTS CA 1O1
+ 1 s:C = US, O = Google Trust Services, CN = GTS CA 1O1
+   i:OU = GlobalSign Root CA - R2, O = GlobalSign, CN = GlobalSign
+
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIFtzCCBJ+gAwIBAgIQZYgPVab72N0FAAAAAIgIBDANBgkqhkiG9w0BAQsFADBC
+... stuffed deleted
+-----END CERTIFICATE-----
+subject=C = US, ST = California, L = Mountain View, O = Google LLC, CN = mqtt.googleapis.com
+
+issuer=C = US, O = Google Trust Services, CN = GTS CA 1O1
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 3064 bytes and written 391 bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---
+
+```
+I should note the diff to the .ino file.  Earlier I mentioned
+I only changed the include.  I've since done non logic flow mods
+to print status.  With that said after the connect error and before
+the halt message which stops the loop, I made a change not in the 
+screenshot which is 
+
+mqttClient.connectError(): -1
+
+![img](imgs/ss31.png)
+
+I haven't had time to look at the capture file in detail, but here are some observations:
+
+* I don't see any red packets
+* It appears to be looping on the client connecting.  I don't think
+this is a wait and it will happen thing.
+* I don't know enough about this, but frame 13 is the first frame
+to the mqtt host.  Its brown in the screenshot.  In the TCP flags
+portion of the frame it has Syn=0.  I believe that is the signal
+of this is the start of our conversation in tcp. Likewise 
+the mqtt host does the same.  Later the first frame in brown after
+the Client sending some application data the mqtt host sends
+a frame with Fin=1 set.  I think this is programtically interpeted
+as i'm closing the socket.
+
+
+![img](imgs/ss32.png)
+
+So let me try to change the crypto chip.  Possibly now that I have
+both certs in play in firmware when I run the firmware to generate
+the public key to upload to gcp iot core it will work.
+
+### Updating the crypto chip
+
+There are two domains loaded via firmware
+
+* google.com:443
+* mqtt.gogapis.somehtingsomeont:8883
+
+There are two key tools which might work for me in the crypto 
+chip examples.
+
+* ECCX08SelfSignedCert
+* ECCX08JWSPublicKey
+
+I'll try the JWS public key one.  I know this code uses JWT.  
+What is a single letter between friends?
+
+Running this code the console says in order to generate a PEM 
+public key for your board, I need to pick a slot 0-4.  I chose
+0.  I wonder if this corresponds to the order in the firmware
+for the domain cert? FWIW, I also said I would like to generate
+a new private key in response.
+
+I took the public key and added it to the other keys in gcp for
+this device.
+
+-----BEGIN PUBLIC KEY-----
+MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENp1a1bFLljzL1D6Dc2jLzd/9Hr3pwi0y4ELGCkBr
+/+PuTBkQm0TWu9oQB25Hw6ZbIRaN1ZvOMB+pM4D2Jj0gBQ==
+-----END PUBLIC KEY-----
+
+This also fails with similar console message. Error = -1
+
+Here is the associated capture.
+
+
+![img](imgs/ss33.png)
 
 
 ## Archive capture file
