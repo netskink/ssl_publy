@@ -3,6 +3,7 @@ ssl capture error discussion
 
 With these websites as a guide
 *[Illustrated SSL](https://tls.ulfheim.net/)
+* https://sites.google.com/site/tlsssloverview/ssl-tls-protocol-layers/handshake-layer/change-cipher-spec-protocol
 
 
 
@@ -552,6 +553,19 @@ And then is where it differs, the client in both cases sends Encrypted Applicait
 
 This is covered here in more detail https://github.com/netskink/ssl_publy 
 ```
+
+## updates
+20210813
+
+According to this 
+
+https://sites.google.com/site/tlsssloverview/ssl-tls-protocol-layers/handshake-layer/change-cipher-spec-protocol
+
+The Change Cipher Spec Protocol is used to switch to symetric key encryption.  The CCS
+protocol is a single message that tells the peer that the send wants to change to a new
+set of keys, which are then created from information exchanged by the handshake protocol.
+
+
 
 ## Archive capture file
 This is a 202108 or 07 capture file.  After this one, I modifed the firmware and crypto.
