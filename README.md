@@ -484,6 +484,56 @@ Here is the associated capture.
 
 ![img](imgs/ss33.png)
 
+##
+## Looking at the capture files 
+Looking at HTTPS-goog-and-mqtt-cert-loaded-new-pem.pcapng
+
+I mentioned the client and server Hello frames.  In the first capture file
+discussion I mentioned these.  Now, I'm focusing on the next message 
+which is the `Certificate, Server Hello Done` message.  This is frame 19.  
+I has two certificates listed.
+
+* Certificate: 308205b73082049fa00302010202110089e5c1d471842f7f... (id-at-commonName=mqtt.googleapis.com,id-at-organizationName=Google LLC,id-at-localityName=Mountain View,id-at-stateOrProvinceName=California,id-at-countryName=US)
+
+* Certificate: 3082044a30820332a003020102020d01e3b49aa18d8aa981... (id-at-commonName=GTS CA 1O1,id-at-organizationName=Google Trust Services,id-at-countryName=US)
+
+Both of these certs are specified as version v3 (2).
+
+Both of these certs are specified as algorithm identifier sha256WithRSAEncryption.
+
+Frame 22 is the next SSL frame and its from the client.  The client sends a 
+Client Key Exxchange, Change Cipher Spec, ...
+
+This leads me to believe the client cant support the algorithm.
+
+Hmm.  Looking back at frame 16 which is the Client Hello 
+message.  It lists five cipher suites:
+
+* TLS RSA WITH AES 128 GCM SHA256
+* TLS RSA WITH AES 256 CBC SHA256
+* TLS RSA WITH AES 128 CBC SHA256
+* TLS RSA WITH AES 256 CBC SHA
+* TLS RSA WITH AES 128 CBC SHA
+
+Looking at the HTTPS google web fetch capture file, 
+I see that this pattern is similar.  The server
+sent the same two SSL certificates and then the client
+sent the same Change Cipher Spec frame. The similarity 
+continues, the client sent Encrypted Application Data.
+In fact the client sends 10 Encrypted Applicaiton Data
+before the server responds with more than 20 Encrypted 
+Application Data packets.  Remember in this scenario
+the arduino pulled down a webpage over https.
+
+This is similar but differnt from the MQTT exchange.
+The handshake seems the same and everything looks 
+the same until the Client sends one Encrypted 
+Application Data frame.  At that point, the server
+sends an ack frame of the last message - its tcp - 
+then it sends the frame with the Fin=1 flag set
+closing the socket.
+
+Why?
 
 ## Archive capture file
 This is a 202108 or 07 capture file.  After this one, I modifed the firmware and crypto.
