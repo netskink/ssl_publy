@@ -486,6 +486,8 @@ Here is the associated capture.
 
 ##
 ## Looking at the capture files 
+20210812
+
 Looking at HTTPS-goog-and-mqtt-cert-loaded-new-pem.pcapng
 
 I mentioned the client and server Hello frames.  In the first capture file
@@ -534,6 +536,22 @@ then it sends the frame with the Fin=1 flag set
 closing the socket.
 
 Why?
+
+## Summary Sent to mailing list
+##
+```
+Hmm.  I compared the traffic between the HTTPS client which works and the SSL/MQTT which fails.
+Both scenarios start the same
+1. Client Hello2. Server Hello3. Certificate, Server Hello Done
+I examined the Certificate frame in either case and they were the same two certificates.  
+4.  Client Key Exchange, Change Cipher Spec, Encrypted Handshake Message 
+The client sends the same headers for each message: TLS1.2.  I did not compare the Encrypted Handshake Message.
+5. Change Cipher Spec, Encrypted Handshake Message
+The server sends this message.  I don't see anything in particular in these two fields.  I'm guessing its an ack thatit read the message.
+And then is where it differs, the client in both cases sends Encrypted Applicaiton Data.  However, in the case of the HTTPS client(ardujono), it sends around 10 of these frames to the server.  Then in the case of the HTTPS, theserver sends more than 30 frames in response.  In the MQTT situation after the client sends one frame of the Encruyptedapplication data, the server sends a ACK frame and then a ACK Fin=1 frame.
+
+This is covered here in more detail https://github.com/netskink/ssl_publy 
+```
 
 ## Archive capture file
 This is a 202108 or 07 capture file.  After this one, I modifed the firmware and crypto.
