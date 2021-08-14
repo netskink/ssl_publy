@@ -18,6 +18,8 @@
 #include <WiFi101.h> // for MKR1000
 
 #include "arduino_secrets.h"
+//TODO: add ntp
+// make sure time is still not zero
 
 /////// Enter your sensitive data in arduino_secrets.h
 const char ssid[]        = SECRET_SSID;
@@ -53,7 +55,11 @@ void setup() {
   // called when the MQTTClient receives a message
   mqttClient.onMessage(onMessageReceived);
 }
-
+/////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////  LOOP
+///////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 void loop() {
   if (WiFi.status() != WL_CONNECTED) {
     connectWiFi();
@@ -103,6 +109,7 @@ void connectWiFi() {
 }
 
 void connectMQTT() {
+  Serial.print("GCP-Mqtt.ino->connectMQTT(): enter");
   Serial.print("Attempting to connect to MQTT broker: ");
   Serial.print(broker);
   Serial.println(" ");
@@ -154,7 +161,25 @@ String calculateClientId() {
 }
 
 String calculateJWT() {
+
+  // TODO:
+  // While looking at headers in ArduinoECCX08/utility code 
+  // I noticed the ECCX08SelfSignedCert.h has the following
+  // private routines.
+  //
+  //  int buildCert(bool buildSignature);
+  //
+  //  int certInfoLength();
+  //  void appendCertInfo(uint8_t publicKey[], uint8_t buffer[], int length);
+
+
+
+
+  Serial.println("GCP-Mqtt.ino->calculateJWT(): enter");
   unsigned long now = getTime();
+
+  Serial.print("what is get time()");
+  Serial.println(now);
   
   // calculate the JWT, based on:
   //   https://cloud.google.com/iot/docs/how-tos/credentials/jwts
@@ -168,6 +193,8 @@ String calculateJWT() {
   jwtClaim["iat"] = now;
   jwtClaim["exp"] = now + (24L * 60L * 60L); // expires in 24 hours 
 
+  // utility/ECCX08JWS.h
+  // sign(slot, header, payload)
   return ECCX08JWS.sign(0, JSON.stringify(jwtHeader), JSON.stringify(jwtClaim));
 }
 

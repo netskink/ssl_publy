@@ -566,6 +566,64 @@ protocol is a single message that tells the peer that the send wants to change t
 set of keys, which are then created from information exchanged by the handshake protocol.
 
 
+## updates
+20210814
+
+Looking at the code for `~/Arduino/libraries/ArduinoECCX08`.  In particular
+the `GCP-Mqtt.ino->connectMQTT()` routine.
+
+Here is the sequence it does:
+
+1.  `jwt=calculateJWT()`
+2.  specify to the `mqttClient` class username/password "":jwt
+3.  `mqttClient.connect(broker, 8883)`
+
+calculateJWT() is good to look at, because it uses the crypto chip
+which is either connected via i2c or spi.  Which is it?
+
+Lets look at the schematics:
+
+The module is a ATSAMW25H18-MR510PB
+
+Hmm.  The datasheet is for an eval board, but it has
+the following bulleted list.  I believe they are signifying 
+that the module has the MCU, WiFi IC and Crypto chip.
+
+Atmel ATSAMW25H18-MR510PB SmartConnect Wi-Fi Module
+*● SoC ATSAMD21G18A MCU and ATWINC1500 Wi-Fi chip
+*● IEEE 802.11 b/g/n 20MHz SISO in 2.4GHz ISM band
+*● On-board Printed Antenna
+*● ATECC108 Crypto Chip
+
+
+Hmm.  I wonder about relationship between ssl and this 
+crypto chip and the wifi submodule.
+
+Examining datasheet of ATSAMW25H18-MR510PB .  It says:
+
+* Supports 802.11 WEP, WPA
+* Security protocols; WPA/WPA2 Personal, TLS, and SSL
+* Network services; DHCP, DNS, TCP/IP (IPv4), UDP, HTTP, and HTTPS
+
+It has the following block diagram in the datasheet.
+
+
+![img](imgs/ss40.png)
+
+In the schematics for the module it shows an optional 
+crypto IC.  So, its an IC.  Not a core in the SoC.
+Ditto for the WiFi IC.  It says its only on ATSAMW25-MR510PA.
+
+
+![img](imgs/ss41.png)
+
+So is this optional module included with my MKR1000?
+
+Here is a picture of my particular MKR1000.
+
+![img](imgs/ss42.png)
+
+
 
 ## Archive capture file
 This is a 202108 or 07 capture file.  After this one, I modifed the firmware and crypto.
