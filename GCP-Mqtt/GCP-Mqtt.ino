@@ -173,9 +173,26 @@ String calculateJWT() {
   //  void appendCertInfo(uint8_t publicKey[], uint8_t buffer[], int length);
 
 
-
-
   Serial.println("GCP-Mqtt.ino->calculateJWT(): enter");
+  Serial.print("GCP-Mqtt.ino->calculateJWT(): ECCX08.random(10)");
+  Serial.println(ECCX08.random(10));
+  Serial.print("GCP-Mqtt.ino->calculateJWT(): ECCX08.random(100)");
+  Serial.println(ECCX08.random(100));
+
+//String serialNumber();
+
+//
+
+//MqttClient    mqttClient(wifiSslClient);
+
+//long random(long max);
+
+//long random(long min, long max);
+
+//int random(byte data[], size_t length);
+
+
+
   unsigned long now = getTime();
 
   Serial.print("what is get time()");

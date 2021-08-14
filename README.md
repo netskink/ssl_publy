@@ -611,8 +611,9 @@ It has the following block diagram in the datasheet.
 ![img](imgs/ss40.png)
 
 In the schematics for the module it shows an optional 
-crypto IC.  So, its an IC.  Not a core in the SoC.
+crypto IC ATECC508A.  So, its an IC.  Not a core in the SoC.
 Ditto for the WiFi IC.  It says its only on ATSAMW25-MR510PA.
+Also note its only interface is via I2C.
 
 
 ![img](imgs/ss41.png)
@@ -622,6 +623,49 @@ So is this optional module included with my MKR1000?
 Here is a picture of my particular MKR1000.
 
 ![img](imgs/ss42.png)
+
+You can't see what's on the module because it has a metal case,
+but you can read the model number.
+
+ATSAMW25H18-MR510PB
+
+Hmm. Not quite a match.
+
+```
+Only on ATSAMW25      -MR510P A.
+mine    ATSAMW25 (H18)-MR510P B
+```
+
+Hmm. While trying to find a way to determine if its there or not I found
+this
+
+```
+The Info command DevRev mode now returns 0x1005 for ATECC108A and 0x5000 for
+ATECC508A. This value should not be used in the software as it will vary with each minor
+revision.
+```
+
+
+## talking with Burt
+20210814
+
+Update the firmware in winc1500 modules.
+
+Attempted with
+mqtt.2030.ltsapis.goog:8883  <- this one failed to upload.  It said must
+                                have a RSA public key
+mqtt.googleapiscom:8883
+
+Dorking with trying to get from alternate sources fail.
+ie. pki.goog/gtsltsr/gtsltsr.crt:8883
+
+![img](imgs/ss50.png)
+
+
+I should compare the output of these two commands:
+
+* openssl s_client -connect mqtt.2030.ltsapis.goog:8883
+* openssl s_client -connect mqtt.googleapis.com:8883
 
 
 
