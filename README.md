@@ -632,7 +632,7 @@ ATSAMW25H18-MR510PB
 Hmm. Not quite a match.
 
 ```
-Only on ATSAMW25      -MR510P A.
+Only on ATSAMW25      -MR510P A
 mine    ATSAMW25 (H18)-MR510P B
 ```
 
@@ -667,7 +667,19 @@ I should compare the output of these two commands:
 * openssl s_client -connect mqtt.2030.ltsapis.goog:8883
 * openssl s_client -connect mqtt.googleapis.com:8883
 
+## Resolving the LTS cert problem
 
+https://pki.goog/repository/
+
+https://cloud.google.com/iot/docs/concepts/device-security
+
+https://cloud.google.com/iot/docs/how-tos/mqtt-bridge#downloading_mqtt_server_certificates
+
+It seems here that this page is saying you can use one of two differnt root
+certs.
+
+If I just use the domain mqtt.googleapis.com:8883 then HTTPS client code
+fails.
 
 ## Archive capture file
 This is a 202108 or 07 capture file.  After this one, I modifed the firmware and crypto.

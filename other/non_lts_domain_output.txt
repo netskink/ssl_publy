@@ -1,0 +1,64 @@
+CONNECTED(00000003)
+---
+Certificate chain
+ 0 s:C = US, ST = California, L = Mountain View, O = Google LLC, CN = mqtt.googleapis.com
+   i:C = US, O = Google Trust Services, CN = GTS CA 1O1
+ 1 s:C = US, O = Google Trust Services, CN = GTS CA 1O1
+   i:OU = GlobalSign Root CA - R2, O = GlobalSign, CN = GlobalSign
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIFtzCCBJ+gAwIBAgIQZYgPVab72N0FAAAAAIgIBDANBgkqhkiG9w0BAQsFADBC
+MQswCQYDVQQGEwJVUzEeMBwGA1UEChMVR29vZ2xlIFRydXN0IFNlcnZpY2VzMRMw
+EQYDVQQDEwpHVFMgQ0EgMU8xMB4XDTIxMDcxMjAzNTYzOVoXDTIxMTAwNDAzNTYz
+OFowbTELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcT
+DU1vdW50YWluIFZpZXcxEzARBgNVBAoTCkdvb2dsZSBMTEMxHDAaBgNVBAMTE21x
+dHQuZ29vZ2xlYXBpcy5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIB
+AQDwXjLumgn2xMAQDgDQ2OyeRMKw5BPyQQaJ25rESSFIEYF6kL26xp8i2HQP8GvX
+zsJ1gVEN3OOVAsfENvZT+P/6G77OvxMDFNwyfjz/79+TnW3Ow8zp6Orlgzq+fNCw
+1IHAFlem8hnYpZS3MWV4b4dhjQNwUAzVGMIOuQcoV+ouC4vFHDAl0bVqkaMYvLqS
+Wc5QdoPCncI8QEJkgLETduBvOwaqEN6usDo5ZiHLnMnoFiXFXrVKQl/F40F/2cr7
+9LwLifve1bBT2+dQJrfc5L/pLNvkIrF5/1qCyGIes5DLNUKfqamxxBjiq/GJ56xu
+IQq0qLSdJZOTrNeApqsGR2PBAgMBAAGjggJ8MIICeDAOBgNVHQ8BAf8EBAMCBaAw
+EwYDVR0lBAwwCgYIKwYBBQUHAwEwDAYDVR0TAQH/BAIwADAdBgNVHQ4EFgQUhb4F
+ZT4ytT5nxzDg7n7s8y6BmzAwHwYDVR0jBBgwFoAUmNH4bhDrz5vsYJ8YkBug630J
+/SswaAYIKwYBBQUHAQEEXDBaMCsGCCsGAQUFBzABhh9odHRwOi8vb2NzcC5wa2ku
+Z29vZy9ndHMxbzFjb3JlMCsGCCsGAQUFBzAChh9odHRwOi8vcGtpLmdvb2cvZ3Ny
+Mi9HVFMxTzEuY3J0MDgGA1UdEQQxMC+CE21xdHQuZ29vZ2xlYXBpcy5jb22CGG1x
+dHQtbXRscy5nb29nbGVhcGlzLmNvbTAhBgNVHSAEGjAYMAgGBmeBDAECAjAMBgor
+BgEEAdZ5AgUDMDMGA1UdHwQsMCowKKAmoCSGImh0dHA6Ly9jcmwucGtpLmdvb2cv
+R1RTMU8xY29yZS5jcmwwggEFBgorBgEEAdZ5AgQCBIH2BIHzAPEAdwDuwJXujXJk
+D5Ljw7kbxxKjaWoJe0tqGhQ45keyy+3F+QAAAXqZEwrFAAAEAwBIMEYCIQCdox1E
+p2wIOfdwsiY0icOi9EIlwPuyRnnbAFb/4BsARQIhAOwN2zfDNpU8oMHB4cHBfnJw
+eij2AkVfPUYVoJ/fCkuXAHYA9lyUL9F3MCIUVBgIMJRWjuNNExkzv98MLyALzE7x
+ZOMAAAF6mRMKrAAABAMARzBFAiByJoceg0N6i0GKw8y9Ez7EGdKY62o/3lKnIqnx
+Z+bjzwIhAJIVaQgOknUEJ837HiYKYe9BtRn29SqvnFvpAvjHd3ShMA0GCSqGSIb3
+DQEBCwUAA4IBAQBVbwVyVrKDKHu2X3Qu9C2OULgF6f0ocVAkPn+0NrkzpyRHn+5W
+96QNg4XDjnd71V4ok6uZChxuCdnRQiLMyLTQWAW2Xk1SmgslWLu5buuJx8+hpOuV
+LS0gvov309/vaQb+5a7CD5SLRxocPfH5dnIHXxvTOR+0LKgwPt7Hc2egtX5RvWmq
+te3qNjkwhV4irOGflCeSdk/7eOJUVe2B7Q+EByNpoWrb+3Dogqju0cX0oFFZib6w
+DWEszX2ErUwFpH4GCsuaJod4SllXQMvbN+JaOHI32+E85tldnN7MKHKJfSarfW6M
+HM66HdWQytga+onc2RVqCRYwQQwQrcdqgNzP
+-----END CERTIFICATE-----
+subject=C = US, ST = California, L = Mountain View, O = Google LLC, CN = mqtt.googleapis.com
+
+issuer=C = US, O = Google Trust Services, CN = GTS CA 1O1
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 3064 bytes and written 391 bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify return code: 0 (ok)
+---

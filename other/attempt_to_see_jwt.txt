@@ -1,0 +1,47 @@
+I tried to dump bytes of the "signed" JWT 
+and then looking for them in the wireshare mqtt frame sent by the arduino.
+I could find it.  It appears to be encrypted after its signed.
+
+
+
+In arduino, dump first 10 bytes of the signed JWT
+
+65 79 4A 68 62 47 63 69 4F 69
+
+
+From wireshare for the first frame sent after SERVER/CLIENT HELLO handshake 
+frames.
+
+This is the entire frame as hex and ascii
+
+0000   a4 98 13 e9 7e 40 70 4f 57 67 70 7d 08 00 45 00   ¤..é~@pOWgp}..E.
+0010   01 69 00 0f 00 00 3f 06 28 0d c0 a8 01 80 4a 7d   .i....?.(.À¨..J}
+0020   45 ce cf 95 22 b3 5b cc c5 79 7f cd fe e3 50 18   EÎÏ."³[ÌÅy.ÍþãP.
+0030   10 f2 1b 2c 00 00 17 03 03 01 3c 00 00 00 00 00   .ò.,......<.....
+
+This is the TLSv1.2 Record Layer: Application Data Protocol: MQTT
+(actually it starts after the 4F in last line above)
+
+0040   00 00 01 ff 77 5a 6e c6 25 26 22 ff 0b 16 9a 28   ...ÿwZnÆ%&"ÿ...(
+0050   82 70 8f 3e db 01 e1 f0 d8 12 8f 13 0d c0 03 4f   .p.>Û.áðØ....À.O
+0060   4d e1 0b c5 ca a1 78 4f 30 8b af 37 d6 b6 a0 6d   Má.ÅÊ¡xO0.¯7Ö¶ m
+0070   54 d3 ab bb 10 0a 21 9a f5 24 00 8a a9 9d e2 38   TÓ«»..!.õ$..©.â8
+0080   8c 0f e4 83 39 0e 11 86 36 46 b1 bc af 15 1c 8e   ..ä.9...6F±¼¯...
+0090   f5 35 62 23 2c 30 d8 02 05 a4 6a 13 5e 8d cb 03   õ5b#,0Ø..¤j.^.Ë.
+00a0   90 23 91 83 71 2c 5d 98 95 01 43 c0 a5 23 ec b8   .#..q,]...CÀ¥#ì¸
+00b0   7d d6 3c 58 7e 7f 4c 69 0f f2 3f 9a 1b 2e 19 d2   }Ö<X~.Li.ò?....Ò
+00c0   e2 b9 96 7b a8 61 2d 78 90 07 01 5b dd ae 09 58   â¹.{¨a-x...[Ý®.X
+00d0   48 3d 35 7a 25 20 46 9e c3 cd 88 77 63 e5 bc d6   H=5z% F.ÃÍ.wcå¼Ö
+00e0   98 37 88 45 34 54 5a cf 24 49 bf 74 39 be b7 5f   .7.E4TZÏ$I¿t9¾·_
+00f0   06 e4 f9 0e 40 e8 b8 e8 75 d6 ed 80 9e b5 bc 35   .äù.@è¸èuÖí..µ¼5
+0100   4f c9 06 c8 5c f7 ad 10 a6 a0 a1 fe 96 e7 20 e6   OÉ.È\÷..¦ ¡þ.ç æ
+0110   0f f6 54 f1 f4 31 5a 80 f8 01 69 5c d5 fe f7 ac   .öTñô1Z.ø.i\Õþ÷¬
+0120   fe 16 e8 8d 66 7d b2 e1 a8 ba 75 37 7a 26 cf 3d   þ.è.f}²á¨ºu7z&Ï=
+0130   53 6f d8 46 7f 1e f8 cc 73 c9 61 31 6e 36 df e8   SoØF..øÌsÉa1n6ßè
+0140   8d c6 df f2 7c bb 85 15 23 78 ce 03 90 87 03 6f   .Æßò|»..#xÎ....o
+0150   ad 84 05 9c 48 98 44 7c 86 b7 62 19 ee 80 ea f3   ....H.D|.·b.î.êó
+0160   5c 5c 70 ce d6 5f d3 2c 9d 0e 76 b4 1a c7 b1 0c   \\pÎÖ_Ó,..v´.Ç±.
+0170   0b 2f 3d a9 b5 fd a3                              ./=©µý£
+
+You will not find any portion of the bytes above in the frame dump.
+

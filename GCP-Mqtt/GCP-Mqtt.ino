@@ -54,6 +54,10 @@ void setup() {
   // Set the message callback, this function is
   // called when the MQTTClient receives a message
   mqttClient.onMessage(onMessageReceived);
+
+
+  // test the crypto chip
+  test_crypto();
 }
 /////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
@@ -174,23 +178,6 @@ String calculateJWT() {
 
 
   Serial.println("GCP-Mqtt.ino->calculateJWT(): enter");
-  Serial.print("GCP-Mqtt.ino->calculateJWT(): ECCX08.random(10)");
-  Serial.println(ECCX08.random(10));
-  Serial.print("GCP-Mqtt.ino->calculateJWT(): ECCX08.random(100)");
-  Serial.println(ECCX08.random(100));
-
-//String serialNumber();
-
-//
-
-//MqttClient    mqttClient(wifiSslClient);
-
-//long random(long max);
-
-//long random(long min, long max);
-
-//int random(byte data[], size_t length);
-
 
 
   unsigned long now = getTime();
@@ -212,7 +199,19 @@ String calculateJWT() {
 
   // utility/ECCX08JWS.h
   // sign(slot, header, payload)
-  return ECCX08JWS.sign(0, JSON.stringify(jwtHeader), JSON.stringify(jwtClaim));
+  String foo;
+  foo = ECCX08JWS.sign(0, JSON.stringify(jwtHeader), JSON.stringify(jwtClaim));
+  Serial.print("The clear text  header:alg portion of JWT ");
+  Serial.println(jwtHeader["alg"]);
+  Serial.print("The first 10 bytes of encrypted JWT from the ECCX008JWS.sign() as hex ");
+  for (int xx=0;xx<10;xx++) {
+    Serial.print(foo[xx],HEX);
+  }
+  Serial.println("");
+  Serial.print("Lenght of encrypted JWT from the ECCX008JWS.sign() ");
+  Serial.println(foo.length());
+  // ORIGreturn ECCX08JWS.sign(0, JSON.stringify(jwtHeader), JSON.stringify(jwtClaim));
+  return foo;
 }
 
 void publishMessage() {
@@ -240,4 +239,19 @@ void onMessageReceived(int messageSize) {
   Serial.println();
 
   Serial.println();
+}
+
+void test_crypto() {
+  Serial.print("GCP-Mqtt.ino->test_crypto(): ECCX08.random(5)");
+  // verify result is less than 5
+  Serial.println(ECCX08.random(5));
+  Serial.print("GCP-Mqtt.ino->test_crypto(): ECCX08.random(10)");
+  // verify result is less than 10
+  Serial.println(ECCX08.random(10));
+  Serial.print("GCP-Mqtt.ino->test_crypto(): ECCX08.random(100)");
+  // Verify result is less than 100
+  Serial.println(ECCX08.random(100));
+
+  Serial.print("GCP-Mqtt.ino->test_crypto(): ECCX08.serialNumber(100)");
+  Serial.println(ECCX08.serialNumber());
 }
