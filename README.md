@@ -667,6 +667,18 @@ I should compare the output of these two commands:
 * openssl s_client -connect mqtt.2030.ltsapis.goog:8883
 * openssl s_client -connect mqtt.googleapis.com:8883
 
+other commands too use
+openssl s_client -showcerts -connect www.google.com:443 | less
+
+echo | openssl s_client -showcerts -servername gnupg.org -connect gnupg.org:443 2>/dev/null | openssl x509 -inform pem -noout -text
+
+curl --insecure -vvI https://www.google.com 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }'
+
+nmap -p 443 --script ssl-cert gnupg.org
+
+
+
+
 ## Resolving the LTS cert problem
 
 https://pki.goog/repository/
