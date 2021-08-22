@@ -1,4 +1,9 @@
+
+
 google-cloud-iot-arduino/
+
+*.swp
+
 # Prerequisites
 *.d
 
