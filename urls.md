@@ -11,8 +11,11 @@
 
 
 ## GCP Example specifies the following SSL related urls
-* https://pki.goog/roots.pem 
+* [roots cert](https://pki.goog/roots.pem)
   * Stored locally [here ](certs/roots.pem)
+* [MQTT LTS Domain](mqtt.2030.ltsapis.goog)
+* [Primary cert](https://pki.goog/gtsltsr/gtsltsr.crt)
+* [Backup cert](https://pki.goog/gsr4/GSR4.crt)
 
 
 https://sites.google.com/site/tlsssloverview/ssl-tls-protocol-layers/handshake-layer/change-cipher-spec-protocol
