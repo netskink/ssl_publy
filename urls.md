@@ -12,7 +12,7 @@
 
 ## GCP Example specifies the following SSL related urls
 * https://pki.goog/roots.pem 
-  * Stored locally [here ](/certs/root.pem)
+  * Stored locally [here ](certs/root.pem)
 
 
 https://sites.google.com/site/tlsssloverview/ssl-tls-protocol-layers/handshake-layer/change-cipher-spec-protocol
