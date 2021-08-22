@@ -1,8 +1,8 @@
 # Important URLS
 
 ## Web Guides
-*[Illustrated SSL](https://tls.ulfheim.net/)
-* https://sites.google.com/site/tlsssloverview/ssl-tls-protocol-layers/handshake-layer/change-cipher-spec-protocol
+* [Illustrated SSL](https://tls.ulfheim.net/)
+* [google ssl tls protocol](https://sites.google.com/site/tlsssloverview/ssl-tls-protocol-layers/handshake-layer/change-cipher-spec-protocol)
 
 ## SSL GCP
 
