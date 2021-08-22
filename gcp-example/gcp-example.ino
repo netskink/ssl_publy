@@ -39,7 +39,10 @@ void loop(){
 #include "mkr1000-mqtt.h"
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(115200);
+  Serial.println("YO YO YO");
+  Serial.println("YO YO YO");
+  Serial.println("YO YO YO");
   pinMode(LED_BUILTIN, OUTPUT);
   setupCloudIoT();
 }

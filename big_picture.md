@@ -19,3 +19,26 @@ or on the client.  The client does not fetch the certs during the handshake.
 Looking at the roots cert aka roots.pem provided via `https://pki.goog/roots.pem`
 
 It has numerous certs. Around 38.
+
+mqtt.2030.ltsapis.goog:8883
+
+openssl s_client -showcerts mqtt.2030.ltsapis.goog:8883 < /dev/null > mqtt.2030.ltsapis.goog_1.dmp
+
+openssl s_client -showcerts -servername mqtt.2030.ltsapis.goog:8883 -connect mqtt.2030.ltsapis.goog:8883 </dev/null > mqtt.2030.ltsapis.goog_2.dmp 
+ 
+nmap -p 8883 --script ssl-cert mqtt.2030.ltsapis.goog
+
+
+
+nmap output with port 8883 and 443 in above command is identical except
+for port name:
+```
+< PORT    STATE SERVICE
+< 443/tcp open  https
+---
+> PORT     STATE SERVICE
+> 8883/tcp open  secure-mqtt
+```
+
+
+

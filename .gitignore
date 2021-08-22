@@ -1,6 +1,8 @@
-
+*.pem
+keys/
 
 google-cloud-iot-arduino/
+arduino_secrets.h
 
 *.swp
 
