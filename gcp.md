@@ -73,3 +73,56 @@ NIST CURVE: P-256
 ```
 
 
+The GCP example mentions the cert urls.  The cloud.google.com/docs on IoT
+core refer to pki.goog/root.crt (or whatever the url is) as the site
+for the certs.  I used the firmware updater to load the ip address from 
+nslookup on pki.goog and perhaps it loaded them or perhaps not.
+
+Still the error persists.
+
+
+This site has this code
+https://github.com/arduino-libraries/WiFi101/issues/217
+
+```
+static sint8 burn_certificates(void)
+{
+	sint8	ret = 0;
+
+	printf(">> De-init WINC device to enter into download mode\r\n");
+	m2m_wifi_deinit(NULL);
+
+    if(0 != m2m_wifi_download_mode()) {
+		printf("Unable to initialize bus, Press RESET button to try again.\r\n");
+		while(1);
+	}
+
+	printf(">> WINC entered into download mode\r\n");
+
+	printf("---> Start Certificate Upload on WINC\r\n");
+
+	for (uint8 idx=0; idx < NUM_OF_ROOT_TLS_CHAIN_CERTIFICATES; idx++)
+	{
+	   /* Write the Root certificates to WINC */
+	   if(root_tls_certs_name[idx].cert_type == ROOT_CERT)
+	     ret += WriteRootCertificate(root_tls_certs[idx].pu8FileData,root_tls_certs[idx].u32FileSz);
+
+	   /* Write the TLS RSA based certificates to WINC */
+       if(root_tls_certs_name[idx].cert_type == TLS_RSA_CERT)
+	   {
+       	 ret += WriteTlsCertificate(root_tls_certs[idx].pu8FileData,root_tls_certs[idx].u32FileSz,
+		 &root_tls_certs[idx+1],root_tls_certs_name[idx].numOfChainCert);
+		 idx = idx + root_tls_certs_name[idx].numOfChainCert;
+	   }
+
+	   /* Write the TLS ECC based certificates to WINC */
+       if(root_tls_certs_name[idx].cert_type == TLS_ECC_CERT)
+       {
+	       ret += WriteTlsCertificate(NULL,0,&root_tls_certs[idx],root_tls_certs_name[idx].numOfChainCert);
+		   idx = idx + root_tls_certs_name[idx].numOfChainCert -1;
+       }
+    }
+
+	return ret;
+}
+```
