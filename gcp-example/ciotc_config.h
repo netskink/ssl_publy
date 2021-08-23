@@ -18,29 +18,17 @@
 // TODO(you): Install root certificate to verify tls connection as described
 // in https://www.hackster.io/arichetta/add-ssl-certificates-to-mkr1000-93c89d
 
+#include "arduino_secrets.h"
+
 // Wifi network details.
-const char* ssid = "YOUR_SSID";
-const char* password = "YOUR_PASSWORD";
+const char* ssid = SECRET_SSID;
+const char* password = SECRET_PASS;
 
 // Cloud iot details.
-const char* project_id = "YOUR-PROJECT-ID";
-const char* location = "us-central1";
-const char* registry_id = "YOUR-REGISTRY-ID";
-const char* device_id = "YOUR-DEVICE-ID";
-
-// To get the private key run (where private-key.pem is the ec private key
-// used to create the certificate uploaded to google cloud iot):
-// openssl ec -in <private-key.pem> -noout -text
-// and copy priv: part.
-// The key length should be exactly the same as the key length bellow (32 pairs
-// of hex digits). If it's bigger and it starts with "00:" delete the "00:". If
-// it's smaller add "00:" to the start. If it's too big or too small something
-// is probably wrong with your key.
-const char* private_key_str =
-    "5a:2e:06:b5:c1:f2:9c:b3:77:b2:89:f5:29:29:93:"
-    "07:fd:ed:22:0d:03:2b:a6:b1:b6:04:0b:d5:9b:49:"
-    "7d:ca";
-
+const char* project_id = SECRET_PROJECT_ID;
+const char* location = SECRET_CLOUD_REGION;
+const char* registry_id = SECRET_REGISTRY_ID;
+const char* device_id = SECRET_DEVICE_ID;
 // Time (seconds) to expire token += 20 minutes for drift
 const int jwt_exp_secs = 3600; // Maximum 24H (3600*24)
 
