@@ -45,6 +45,9 @@ cloud.google.com/docs
 https://cloud.google.com/iot/docs/how-tos/mqtt-bridge#downloading_mqtt_server_certificates
 
 
+# url for decoding base64
+https://cryptii.com/pipes/base64-to-hex
+
 
 ```
 nmap -p 443 --script ssl-cert gnupg.org
