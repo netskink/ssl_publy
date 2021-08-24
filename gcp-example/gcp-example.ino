@@ -40,9 +40,10 @@ void loop(){
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);
-  Serial.println("YO YO YO");
-  Serial.println("YO YO YO");
-  Serial.println("YO YO YO");
+  delay(5000);
+  Serial.println("1 YO YO YO");
+  Serial.println("2 YO YO YO");
+  Serial.println("3 YO YO YO");
   pinMode(LED_BUILTIN, OUTPUT);
   setupCloudIoT();
 }
@@ -56,6 +57,7 @@ void loop() {
     connect();
   }
 
+  // publish a message roughly every second.
   // publish a message roughly every second.
   if (millis() - lastMillis > 1000) {
     lastMillis = millis();

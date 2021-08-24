@@ -128,8 +128,8 @@ void connectMQTT() {
       Serial.print("mqttClient.connectError(): ");
       Serial.println(mqttClient.connectError());
       // failed, retry
-      Serial.print("Halt");
-      while(true);
+      //Serial.print("Halt");
+      //while(true);
       //Serial.print(".");
       delay(5000);
     }
