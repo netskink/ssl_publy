@@ -45,6 +45,15 @@ cloud.google.com/docs
 https://cloud.google.com/iot/docs/how-tos/mqtt-bridge#downloading_mqtt_server_certificates
 
 
+
+
+# openssl DER notes
+https://wiki.openssl.org/index.php/DER
+
+
+
+
+
 # url for decoding base64
 https://cryptii.com/pipes/base64-to-hex
 
