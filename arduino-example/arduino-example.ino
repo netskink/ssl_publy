@@ -215,7 +215,10 @@ String calculateJWT() {
 }
 
 void publishMessage() {
-  Serial.println("Publishing message");
+  Serial.print("Publishing message to ");
+  Serial.print("/devices/");
+  Serial.print(deviceId);
+  Serial.println("/state");
 
   // send message, the Print interface can be used to set the message contents
   mqttClient.beginMessage("/devices/" + deviceId + "/state");
